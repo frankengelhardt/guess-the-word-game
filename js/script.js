@@ -26,13 +26,12 @@ const message = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again");
 
 /*------------------------------------------------------------------------------------------- */
+// Globale Variablen für das Spiel
 
-/*globale variable für start word */
-let word ="magnolia";
-// Array zur Speicherung der geratenen Buchstaben
-let guessedLetters = [];
-// Anzahl der verbleibenden Versuche 
-let remainingGuesses = 8;
+let word ="magnolia";// Das zu erratende Wort (wird später durch eine zufällige Auswahl ersetzt)
+let guessedLetters = [];// Array zur Speicherung der geratenen Buchstaben 
+let remainingGuesses = 8; // Anzahl der verbleibenden Versuche
+let gameOver = false; // Variable zur Kontrolle, ob das Spiel vorbei ist
 
 /*---------------------------------------------------------------------------------------- */
 
@@ -66,6 +65,10 @@ const placeholder = function (word) {
 // Event Listener für den "Raten"-Button
 guessLetterButton.addEventListener("click", function (e) {
 	e.preventDefault();  /*verhindert neuladeverhalten */
+	// Falls das Spiel vorbei ist, keine weiteren Eingaben zulassen
+    if (gameOver) {
+        return;
+    }
 	message.innerText = ""; // Leert die Nachricht
 	const guess = letterInput.value; // Erfasst den eingegebenen Buchstaben
 	const goodGuess = validateInput(guess); // Überprüft die Eingabe
@@ -154,18 +157,20 @@ const updateGuessesRemaining = function (guess) {
     message.innerText = `Good guess! The word has the letter ${guess}.`;
   }
  // Überprüfe den Spielstatus basierend auf den verbleibenden Versuchen
-  if (remainingGuesses === 0) {
+  if (remainingGuesses <= 0) {
   // Wenn keine Versuche mehr übrig sind, beende das Spiel
-    message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
-	startOver();
-  } else if (remainingGuesses === 1) {
-  // Wenn nur noch ein Versuch übrig ist, verwende Einzahl
-    remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+		message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
+		gameOver = true;
+		startOver();
   } else {
   // Ansonsten verwende Mehrzahl  
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
   }
 };
+/*else if (remainingGuesses === 1) {
+  // Wenn nur noch ein Versuch übrig ist, verwende Einzahl
+    remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+  }*/ 
 
 /*---------------------------------------------------------------------------------------- */
 
@@ -175,6 +180,7 @@ const checkIfWin = function () {
 	// Vergleich: Ist das geheime Wort vollständig erraten?  
     message.classList.add("win"); // Fügt eine CSS-Klasse hinzu, um eine Gewinnnachricht hervorzuheben
     message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+	gameOver = true;
 	/* Zeigt eine Erfolgsnachricht an */
 	startOver();
   }
@@ -198,6 +204,7 @@ playAgainButton.addEventListener("click", function () {
   message.classList.remove("win"); // Entferne die "Gewonnen"-Klasse von der Nachricht
   guessedLetters = []; // Leere das Array der geratenen Buchstaben
   remainingGuesses = 8; // Setze die Anzahl der verbleibenden Versuche zurück
+  gameOver = false;
   remainingGuessesSpan.innerText = `${remainingGuesses} guesses`; // Aktualisiere den Text für die verbleibenden Versuche
   guessedLettersElement.innerHTML = ""; // Leere die Liste der angezeigten geratenen Buchstaben
   message.innerText = ""; // Leere die Nachricht
