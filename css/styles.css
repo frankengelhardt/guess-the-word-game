@@ -2,12 +2,26 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Unlock';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/Unlock/Unlock-Regular.ttf') format('truetype');
+}
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'OpenSans', sans-serif;
   font-style: normal;
   font-size: 20px;
   line-height: 150%;
@@ -27,7 +41,7 @@ h1 {
   width: 100%;
   padding-top: 1em;
   margin: 0;
-  font-family: "Unlock", sans-serif;
+  font-family: 'Unlock', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 44px;
