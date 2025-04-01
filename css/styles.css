@@ -76,7 +76,7 @@ h1 {
 
 .word-in-progress {
   letter-spacing: 15px;
-  color: #28bdbd;
+  color: #295f5f;
   font-size: 30px;
 }
 
@@ -145,7 +145,7 @@ input:focus {
   outline: 0;
   transform: scale(0.98);
   filter: brightness(0.9);
-  color: white;
+  color: #000000;
 }
 
 /* animatied background */
