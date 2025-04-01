@@ -127,7 +127,7 @@ input:focus {
   padding: 1em 3em;
   border-radius: 50px;
   margin-top: 1em;
-  color: #fff;
+  color: #000000;
   background: #ff8d5c;
   font-size: 1em;
   align-self: center;
@@ -145,7 +145,7 @@ input:focus {
   outline: 0;
   transform: scale(0.98);
   filter: brightness(0.9);
-  color: #000000;
+  color: white;
 }
 
 /* animatied background */
